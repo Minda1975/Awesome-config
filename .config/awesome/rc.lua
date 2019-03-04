@@ -157,6 +157,14 @@ vicious.register(uptimewidget, vicious.widgets.uptime,
                      return ("Uptime: %02d %02d:%02d "):format(
                          args[1], args[2], args[3])
                  end, 61)
+--Os
+oswidget = wibox.widget.textbox()
+vicious.register(oswidget, vicious.widgets.os, "System : $1 - $3")
+-- Network usage widget
+netwidget = wibox.widget.textbox()
+vicious.register(netwidget, vicious.widgets.net, '${enp8s0 down_kb} ${enp8s0 up_kb}', 3)
+
+                 
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
@@ -257,6 +265,10 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mpdwidget,
+            spacer,
+            oswidget,
+            spacer,
+            netwidget,
             spacer,
             mykeyboardlayout,
             wibox.widget.systray(),
